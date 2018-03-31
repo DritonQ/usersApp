@@ -1,0 +1,1 @@
+This is a basic app that fetch data from json file and show them on the UI. 
