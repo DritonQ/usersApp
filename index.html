@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+     <link rel="stylesheet" href="style.css">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="page-wrapper">
+        <div class="container">
+          <div id="users"></div>
+        </div>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function () {
+        function getUsers(){
+            
+            var displayUsers = $('#users');
+                
+             displayUsers.text('Loading data from JSON source...');
+             
+             $.ajax({
+                 type: "GET",
+                 url: "users/users.json",
+                 success: function(result)
+                 {
+                     var output="<ul class='row'>";
+                     for (var i in result)
+                     {
+                        output+='<li class="col-lg-3 col-md-4 col-sm-6"><div class="card"><div class="card-body"> <h6 class="card-title">'+ result[i].name  +'</h6> <p class="card-text">' + result[i].website + '</p><button type="button" class="btn btn-primary"> User Details</button></div></div></li>';
+                     }
+                     output+="</ul>";
+                     
+                     displayUsers.html(output);
+                 }
+             });
+        }
+        getUsers();
+    });
+    </script>
+  </body>
+</html>
